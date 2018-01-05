@@ -1,1 +1,30 @@
-body{font-family:Helvetica,Arial,sans-serif;text-align:center}h1{border:1px solid #369;color:#369;padding:5px}p{border:1px solid #686868;padding:20px;margin:30px auto;width:50%;font-size:18px}button{border:1px solid #369;color:#369;padding:10px 15px;font:inherit;cursor:pointer;outline:none;border-radius:5px}button:hover{background-color:#6596c7;color:#fff}button:active{background-color:#686868}p{color:#686868}
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center; }
+
+h1 {
+  color: #336699;
+  padding: 5px; }
+
+p {
+  border: 1px solid #686868;
+  padding: 20px;
+  margin: 30px auto;
+  width: 50%;
+  font-size: 18px; }
+button {
+  border: 1px solid #336699;
+  color: #336699;
+  padding: 10px 15px;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px; }
+  button:hover {
+    background-color: #6596c7;
+    color: #fff; }
+  button:active {
+    background-color: #686868; }
+
+p {
+  color: #686868; }

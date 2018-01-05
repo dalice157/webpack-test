@@ -24,12 +24,25 @@ module.exports = {
 								'sass-loader'
 						]
 				})
+			},
+			{
+				test: /\.js$/,
+				exclude: /(node_modules|bower_components)/,
+				loader: 'babel-loader',
+				query: {
+					presets: ['es2015'],
+					plugins: ['transform-runtime']
+				}
 			}]
 	},
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin(function(){
 			//Do something!!
 		}),
-		new ExtractTextPlugin('style.css') //將全部的css打包成一支
+		new ExtractTextPlugin('style.css'), //將全部的css打包成一支
+		new webpack.ProvidePlugin({ // 利用 webpack.ProvidePlugin 讓 $ 和 jQuery 可以連結到 jquery library
+				$: 'jquery',
+				jQuery: 'jquery'
+		})
 	]
 }

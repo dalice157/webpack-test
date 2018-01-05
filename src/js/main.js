@@ -1,7 +1,8 @@
 // import '../css/style.css';
 // import '../css/button.css';
-
+import 'jquery';
 // import '../scss/_color.scss';
+
 import '../scss/style.scss';
 import '../scss/button.scss';
 
