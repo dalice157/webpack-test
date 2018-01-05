@@ -13,16 +13,16 @@ module.exports = {
 		rules: [{
 			test: /\.css$/,//test 通常是使用一段 regex(正則表達式)
 			use: [ //use會指定使用哪個 loader
-					'style-loader',  // 這個後 (順序很重要)
-					'css-loader' // 這個先
+				'style-loader',  // 這個後 (順序很重要)
+				'css-loader' // 這個先
 			]},
 			{
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({ //利用 extractPlugin 實例裡的 extract 來建立 Loader
-						use: [
-								'css-loader', 
-								'sass-loader'
-						]
+					use: [
+						'css-loader', 
+						'sass-loader'
+					]
 				})
 			},
 			{
@@ -41,8 +41,8 @@ module.exports = {
 		}),
 		new ExtractTextPlugin('style.css'), //將全部的css打包成一支
 		new webpack.ProvidePlugin({ // 利用 webpack.ProvidePlugin 讓 $ 和 jQuery 可以連結到 jquery library
-				$: 'jquery',
-				jQuery: 'jquery'
+			$: 'jquery',
+			jQuery: 'jquery'
 		})
 	]
 }

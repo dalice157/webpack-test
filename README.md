@@ -1,5 +1,5 @@
 # Webpack 筆記
-## webpack.config.js 設定檔記錄
+## webpack.config.js 說明
 - 變數定義
 ``` javascript
 //nodeJs 原生的 path module
@@ -19,3 +19,12 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 	- `rules`：代表會依序使用哪些 `loader` 來編譯這份檔案，`rules` 裡會新增每一條編譯的規則，而這裡每條規則都會有 `test` 和 `use` 兩個欄位
 		- `test`：通常是使用一段 regex(正則表達式)
 		- `use`：用來指定 `loader`
+## 有使用的 plugin
+- babel-loader
+- css-loader
+- style-loader
+- sass-loader
+- webpack
+- extract-text-webpack-plugin
+- jquery
+
