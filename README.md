@@ -1,4 +1,4 @@
-# Webpack 筆記
+# Webpack 筆記
 ## webpack.config.js 設定檔記錄
 - 變數定義
 ``` javascript
