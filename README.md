@@ -1,11 +1,18 @@
 # Webpack 筆記
-## webpack.config.js 說明
+## package.json `script` 使用說明
+- `build`：打包，但沒有監聽，所以每更新一次需在啟動一次
+- `build:watch`：打包且有監聽，無須一直啟動
+- `build:prod`：打包外加檔案壓縮，並且也有監聽
+- `dev`：啟 server、打包、檔案壓縮、監聽
+## 設定檔基本款說明
 - 變數定義
+	- path：nodeJs 原生的 path module
+	- webpack：匯入 webpack 套件
+	- ExtractTextPlugin：將全部的 css 打包成一支
 ``` javascript
-//nodeJs 原生的 path module
-var path = require('path');
-//將全部的css打包成一支
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 ```
 - `module.exports` 可讓設定檔可在外部使用
 - `entry` 屬性：代表著編譯前檔案的檔名
@@ -27,4 +34,5 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 - webpack
 - extract-text-webpack-plugin
 - jquery
+- webpack-dev-server
 
