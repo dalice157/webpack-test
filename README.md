@@ -17,4 +17,5 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 - `	watch`：當是 `true` 時會自動編譯
 - `module`：用來編譯不同類型的檔案，裡面會新增一個 `rules`
 	- `rules`：代表會依序使用哪些 `loader` 來編譯這份檔案，`rules` 裡會新增每一條編譯的規則，而這裡每條規則都會有 `test` 和 `use` 兩個欄位
-		- `test`
+		- `test`：通常是使用一段 regex(正則表達式)
+		- `use`：用來指定 `loader`
