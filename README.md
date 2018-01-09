@@ -1,9 +1,9 @@
 # Webpack 筆記
 ## package.json `script` 使用說明
-- `build`：打包，但沒有監聽，所以每更新一次需在啟動一次
-- `build:watch`：打包且有監聽，無須一直啟動
-- `build:prod`：打包外加檔案壓縮，並且也有監聽
-- `dev`：啟 server、打包、檔案壓縮、監聽
+- `build`：打包，上線前使用
+- `build:watch`：上線前可先做檢查
+- `dev`：使用 webpack 自訂服務器，可在開發時使用
+- `start`：使用 node 的服務器，可在開發時使用
 ## 設定檔基本款說明
 - 變數定義
 	- path：nodeJs 原生的 path module
@@ -35,4 +35,5 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 - extract-text-webpack-plugin
 - jquery
 - webpack-dev-server
+- url-loader：此檔設定在 8192B 以下檔案會轉成 base64
 
