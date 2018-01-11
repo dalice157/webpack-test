@@ -6,11 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ReloadPlugin = require('reload-html-webpack-plugin');
 
-// import {} from './entry';
-
 //css 拆成多支
-// const extractCSS = new ExtractTextPlugin('css/[name]_css.css');
-// const extractSESS = new ExtractTextPlugin('css/[name]_scss.css');
+const extractCSS = new ExtractTextPlugin('css/[name]_css.css');
+const extractSESS = new ExtractTextPlugin('css/[name]_scss.css');
  
 module.exports = {
 	devtool: 'inline-source-map',
@@ -21,42 +19,42 @@ module.exports = {
 	output: { //使用 path.resolve() 來把相對路徑轉換成絕對路徑
 		path: path.resolve(__dirname, 'dist'), // __dirname 當前的路徑
 		// filename: 'js/index.js' 如果要把全部 js 打包用此方式
-		filename: 'js/[name].js'
+		filename: 'js/[name].js' // [name]會去讀取 entry object
 	},
 	module: { // module是由下往上讀取
 		rules: [
-			{
-				test: /\.(css|scss)$/,
-				use: ExtractTextPlugin.extract({ //利用 extractPlugin 實例裡的 extract 來建立 Loader
-					fallback: 'style-loader',
-					use: [
-						'css-loader',
-						'sass-loader',
-						'postcss-loader'
-					]
-				})
-			},
 			// {
-			// 	test: /\.css$/,
-			// 	use: extractCSS.extract({
+			// 	test: /\.(css|scss)$/,
+			// 	use: ExtractTextPlugin.extract({ //利用 extractPlugin 實例裡的 extract 來建立 Loader
 			// 		fallback: 'style-loader',
 			// 		use: [
 			// 			'css-loader',
+			// 			'sass-loader',
 			// 			'postcss-loader'
 			// 		]
 			// 	})
 			// },
-			// {
-			// 	test: /\.scss$/,
-			// 	use: extractSESS.extract({
-			// 		fallback: 'style-loader',
-			// 		use: [
-			// 			'css-loader',
-			// 			'postcss-loader',
-			// 			'sass-loader'
-			// 		]
-			// 	})
-			// },
+			{
+				test: /\.css$/,
+				use: extractCSS.extract({
+					fallback: 'style-loader',
+					use: [
+						'css-loader',
+						'postcss-loader'
+					]
+				})
+			},
+			{
+				test: /\.scss$/,
+				use: extractSESS.extract({
+					fallback: 'style-loader',
+					use: [
+						'css-loader',
+						'postcss-loader',
+						'sass-loader'
+					]
+				})
+			},
 			{
 				test: /\.js$/,
 				exclude: /(node_modules|bower_components)/,
@@ -109,9 +107,9 @@ module.exports = {
 		hot: true
 	},
 	plugins: [
-		// extractCSS,
-		// extractSESS,
-		new ExtractTextPlugin('css/style.css'), //將全部的 css 打包成一支，且不會內砍在 html 裡
+		extractCSS,
+		extractSESS,
+		// new ExtractTextPlugin('css/style.css'), //將全部的 css 打包成一支，且不會內砍在 html 裡
 		new ReloadPlugin(),
 		// new UglifyJSPlugin(),//壓縮檔案，不建議在開發時使用
 		new HtmlWebpackPlugin({ //生成 html 文件
