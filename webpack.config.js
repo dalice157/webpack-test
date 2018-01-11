@@ -4,25 +4,24 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ReloadPlugin = require('reload-html-webpack-plugin');
+
+// import {} from './entry';
 
 //css 拆成多支
 // const extractCSS = new ExtractTextPlugin('css/[name]_css.css');
 // const extractSESS = new ExtractTextPlugin('css/[name]_scss.css');
  
 module.exports = {
-	// entry: [ // 當 js 有更改時會自動 reload
-	// 	'webpack-hot-middleware/client', 
-	// 	'./src/js/main.js'
-	// ],
-	entry: {//js 拆成兩支
+	devtool: 'inline-source-map',
+	entry: { //將 js 分成多支
 		bundle: './src/js/main.js',
 		print: './src/js/print.js'
 	},
-	// devtool: 'inline-source-map',
 	output: { //使用 path.resolve() 來把相對路徑轉換成絕對路徑
-			path: path.resolve(__dirname, 'dist'), // __dirname 當前的路徑
-			// filename: 'index.js'
-			filename: './js/[name].js'
+		path: path.resolve(__dirname, 'dist'), // __dirname 當前的路徑
+		// filename: 'js/index.js' 如果要把全部 js 打包用此方式
+		filename: 'js/[name].js'
 	},
 	module: { // module是由下往上讀取
 		rules: [
@@ -85,8 +84,8 @@ module.exports = {
 				use: [{
 					loader: 'url-loader',
 					options: {
-						limit: 1,
-						outputPath: './img/'
+						limit: 1024,
+						outputPath: 'img/'
 					} 
 				}]
 			},
@@ -104,20 +103,21 @@ module.exports = {
 		]
 	},
 	devServer: { // webpack-dev-server 使用
-		hot: true,
-		contentBase: path.join(__dirname, ''), // 因為 index.html 在根目錄
-		publicPath: '/dist',
-		stats: { colors: true }
+		contentBase: path.resolve(__dirname, 'dist/'),
+		// publicPath: __dirname + "/dist",
+		port: 3000,
+		hot: true
 	},
 	plugins: [
 		// extractCSS,
 		// extractSESS,
 		new ExtractTextPlugin('css/style.css'), //將全部的 css 打包成一支，且不會內砍在 html 裡
-		new UglifyJSPlugin(),//壓縮檔案，不建議在開發時使用
+		new ReloadPlugin(),
+		// new UglifyJSPlugin(),//壓縮檔案，不建議在開發時使用
 		new HtmlWebpackPlugin({ //生成 html 文件
 			title: 'Webpack Test',
-			template: './index.html', //輸入路徑
-			filename: 'index.html' //輸出路徑
+			template: path.join(__dirname, 'index.html'), //輸入路徑
+			filename: path.resolve(__dirname, 'dist/index.html') //輸出路徑
 		}),
 		new CleanWebpackPlugin(['dist']),//打包前先清除 dist 資料夾
 		new webpack.HotModuleReplacementPlugin(),

@@ -1,26 +1,37 @@
 const path = require('path');
-const webpack = require('webpack');
 const express = require('express');
+
+const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('./webpack.config.js');
 
 const app = express();
-const config = require('./webpack.config.js');
-const compiler = webpack(config);
+const compiler = webpack(webpackConfig);
+
+webpackConfig.entry.Dev = [
+  'webpack/hot/dev-server', 
+  'webpack-hot-middleware/client?http://localhost:3000'
+];
+webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: '/',
+  // publicPath: '/',
+  publicPath: webpackConfig.output.publicPath,
+  stats: {
+    colors: true 
+  },
+  noInfo: true,
   hot: true,
-  headers: {'Access-Control-Allow-Origin': '*'},
-  inline: true,
-  historyApiFallback: true,
-  watchOptions: {
-    poll: 500
-  }
+  inline: true
 }));
 
 app.use(webpackHotMiddleware(compiler));
 
-app.listen(3000, () => {
-  console.log('server is runing at http://localhost:3000')
+app.listen("3000", (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(' start server at port ' +'3000');
 });
