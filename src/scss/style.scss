@@ -13,6 +13,9 @@ h1 {
 	color: $primary_color;
 	padding: 5px;
 }
+h2 {
+	padding:0 20px 20px;
+}
 p {
 	border: 1px solid $secondary_color;
 	padding: 20px;
@@ -33,9 +36,13 @@ a {
 	}
 }
 .aa{
+	//測試 post-css 的 autoprefixer
 	display: flex;
 }
 img {
 	width: 100px;
 	height: auto;
+}
+.hide{
+	display: none;
 }

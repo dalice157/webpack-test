@@ -8,19 +8,43 @@
 - 變數定義
 	- path：nodeJs 原生的 path module
 	- webpack：匯入 webpack 套件
-	- ExtractTextPlugin：將全部的 css 打包成一支
-``` javascript
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-```
+	- extract-text-webpack-plugin：將全部的 css 打包到指定的資料夾裡
+	- html-webpack-plugin：將 html 打包到指定的資料夾裡
+	- clean-webpack-plugin：每次打包時會先清除指定的資料夾
+	- reload-html-webpack-plugin：讓你的 html 能 hot reload
 - `module.exports` 可讓設定檔可在外部使用
-- `entry` 屬性：代表著編譯前檔案的檔名
-- `output` 屬性：代表編譯後輸出的檔名，webpack 分成 `path` 和 `filename` 兩個欄位做設定
+- `entry` 屬性：入口起點，代表著編譯前檔案的檔名，有分多種方式定義 `entry`，分別如下：
+	- 單個入口：比較常使用在 single page 時，將全部打包成一份
+	``` javacsript
+	entry: './src/js/main.js'
+	```
+	- 物件：常使用在有第三方資源，ex: jQuery library...之類，需與自己寫的 js 做分離打包
+	``` javascript
+	entry: {
+		bundle: './src/js/app.js',
+		vendors: './src/js/vendors.js'
+	}
+	```
+	- 多個頁面各自載入：與物件使用方式一樣，只差在想將不同頁面的 js 做分離
+	``` javascript
+	entry: {
+		pageOne: './src/pageOne/js/app.js',
+		pageTwo: './src/pageTwo/js/app.js',
+		pageThree: './src/pageThree/js/app.js'
+	}
+	```
+- `output` 屬性：輸出到所指定的資料夾及自訂的檔名，設定介紹如下：
 	- `path`：編譯結果的路徑
 		- 使用 `path.resolve()` 來把相對路徑轉換成絕對路徑
 		- `__dirname`：當前的路徑
-	- `filename`：編譯結果的檔名
+	- `filename`：輸出 bundle 的名稱，當入口有多個，常使用的方式如下表：
+	| 模板  | 描述  |
+	| :----------: | :-----------: |
+	| [name]   | 使用入口名稱   |
+	| [id]   | 使用内部 chunk id   |
+	| [hash]   | 使用每次建構過程中產生的 hash   |
+
+
 - `	watch`：當是 `true` 時會自動編譯
 - `module`：用來編譯不同類型的檔案，裡面會新增一個 `rules`
 	- `rules`：代表會依序使用哪些 `loader` 來編譯這份檔案，`rules` 裡會新增每一條編譯的規則，而這裡每條規則都會有 `test` 和 `use` 兩個欄位
