@@ -46,3 +46,11 @@ img {
 .hide{
 	display: none;
 }
+.bg{
+	//測試背景打包路徑
+	background-image: url('../img/freepik.jpg');
+	background-size: 100% auto;
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+}

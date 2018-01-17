@@ -16,6 +16,7 @@ module.exports = {
 	},
 	output: { //使用 path.resolve() 來把相對路徑轉換成絕對路徑
 		path: path.resolve(__dirname, 'dist'), // __dirname 當前的路徑
+		publicPath: 'http://localhost:3000/',
 		filename: 'js/[name].js' // [name]會去讀取 entry object
 	},
 	module: { // module是由下往上讀取
