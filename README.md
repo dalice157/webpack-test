@@ -4,7 +4,7 @@
 - `build:watch`：上線前可先做檢查
 - `dev`：使用 webpack 自訂服務器，可在開發時使用
 - `start`：使用 node 的服務器，可在開發時使用
-## 設定檔基本款說明
+## 設定檔基本說明
 - 變數定義
 	- path：nodeJs 原生的 path module
 	- webpack：匯入 webpack 套件
@@ -22,7 +22,7 @@
 	``` javascript
 	entry: {
 		bundle: './src/js/app.js',
-		vendors: './src/js/vendors.js'
+		vendors: ['./src/js/jquery.min.js', './src/js/googleAnalytics.js']
 	}
 	```
 	- 多個頁面各自載入：與物件使用方式一樣，只差在想將不同頁面的 js 做分離
@@ -35,17 +35,30 @@
 	```
 - `output` 屬性：輸出到所指定的資料夾及自訂的檔名，設定介紹如下：
 	- `path`：編譯結果的路徑
-		- 使用 `path.resolve()` 來把相對路徑轉換成絕對路徑
+		- 使用 `path.resolve()` 來把相對路徑轉換成絕對路徑，(當前路徑, '指定的資料夾')
 		- `__dirname`：當前的路徑
+		``` javascript
+		path: path.resolve(__dirname, 'dist'),
+		```
 	- `filename`：輸出 bundle 的名稱，當入口有多個，常使用的方式如下表：
-	
+
 	| 模板        | 描述    |
 	| --------   | :-----  |
 	| [name]        | 使用入口名稱      |
 	| [id]        | 使用内部 chunk id      |
 	| [hash]        | 使用每次建構過程中產生的 hash      |
 
-- `	watch`：當是 `true` 時會自動編譯
+	``` javascript
+	//單個入口起點
+	filename: "bundle.js"
+	//入口名稱
+	filename: "[name].bundle.js"
+	//內部 chunk id
+	filename: "[id].bundle.js"
+	//每次建構過程中產生的 hash
+	filename: "[hash].bundle.js"
+	```
+- `watch`：當是 `true` 時會自動編譯
 - `module`：用來編譯不同類型的檔案，裡面會新增一個 `rules`
 	- `rules`：代表會依序使用哪些 `loader` 來編譯這份檔案，`rules` 裡會新增每一條編譯的規則，而這裡每條規則都會有 `test` 和 `use` 兩個欄位
 		- `test`：通常是使用一段 regex(正則表達式)
