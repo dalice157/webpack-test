@@ -63,14 +63,8 @@
 	- `rules`：代表會依序使用哪些 `loader` 來編譯這份檔案，`rules` 裡會新增每一條編譯的規則，而這裡每條規則都會有 `test` 和 `use` 兩個欄位
 		- `test`：通常是使用一段 regex(正則表達式)
 		- `use`：用來指定 `loader`
-## 有使用的 plugin
-- babel-loader
-- css-loader
-- style-loader
-- sass-loader
-- webpack
-- extract-text-webpack-plugin
-- jquery
-- webpack-dev-server
-- url-loader：此檔設定在 8192B 以下檔案會轉成 base64
+## dependencies 與 devDependencies 差別
+- dependencies：生產環境，於正式發布時會使用到的插件都安裝於此，如:Angular、jquery...
+- devDependencies：開發時使用，於正式發布時不會使用到的插件都安裝於此，如:gulp、typescript
+
 

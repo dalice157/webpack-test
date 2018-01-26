@@ -82,7 +82,9 @@ module.exports = {
 					loader: 'url-loader',
 					options: {
 						limit: 1024,
-						outputPath: 'img/'
+						name: 'img/[name].[ext]',
+						publicPath:'../',//css路徑的前綴詞
+						outputPath: ''
 					} 
 				}]
 			},
