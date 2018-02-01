@@ -71,7 +71,7 @@ module.exports = {
 					options: {
 						limit: 1024,
 						name: 'img/[name].[ext]',
-						publicPath:'./',//css路徑的前綴詞
+						publicPath:'/',//css路徑的前綴詞
 						outputPath: ''
 					} 
 				}]
@@ -95,7 +95,7 @@ module.exports = {
 		new UglifyJSPlugin(),//壓縮檔案，不建議在開發時使用
 		new HtmlWebpackPlugin({ //生成 html 文件
 			title: 'Webpack Test',
-			template: path.join(__dirname, 'index.html'), //輸入路徑
+			template: path.join(__dirname, './src/index.html'), //輸入路徑
 			filename: path.resolve(__dirname, 'dist/index.html') //輸出路徑
 		}),
 		new CleanWebpackPlugin(['dist']),//打包前先清除 dist 資料夾

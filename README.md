@@ -13,7 +13,7 @@
 	- clean-webpack-plugin：每次打包時會先清除指定的資料夾
 	- reload-html-webpack-plugin：讓你的 html 能 hot reload
 - `module.exports` 可讓設定檔可在外部使用
-- `entry` 屬性：入口起點，代表著編譯前檔案的檔名，有分多種方式定義 `entry`，分別如下：
+- `entry` 屬性：輸入文件，代表著編譯前檔案的檔名，有分多種方式定義 `entry`，分別如下：
 	- 單個入口：比較常使用在 single page 時，將全部打包成一份
 	``` javacsript
 	entry: './src/js/main.js'

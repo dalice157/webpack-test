@@ -55,7 +55,7 @@ module.exports = {
 				})
 			},
 			{
-				test: /\.js$/,
+				test: /\.(js|jsx)$/,
 				exclude: /(node_modules|bower_components)/,
 				use:{
 					loader: 'babel-loader',
@@ -83,7 +83,7 @@ module.exports = {
 					options: {
 						limit: 1024,
 						name: 'img/[name].[ext]',
-						publicPath:'../',//css路徑的前綴詞
+						publicPath:'/',//css路徑的前綴詞
 						outputPath: ''
 					} 
 				}]
@@ -115,12 +115,13 @@ module.exports = {
 		new ReloadPlugin(),
 		new HtmlWebpackPlugin({ //生成 html 文件
 			title: 'Webpack Test',
-			template: path.join(__dirname, 'index.html'), //輸入路徑
-			filename: path.resolve(__dirname, 'dist/index.html') //輸出路徑
+			template: path.join(__dirname, './src/index.html'), //輸入路徑
+			filename: path.resolve(__dirname, 'dist/index.html'), //輸出路徑
 		}),
 		new CleanWebpackPlugin(['dist']),//打包前先清除 dist 資料夾
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.ProvidePlugin({ // 利用 webpack.ProvidePlugin 讓 $ 和 jQuery 可以連結到 jquery library
+		new webpack.ProvidePlugin({ 
+			// 利用 webpack.ProvidePlugin 讓 $ 和 jQuery 可以連結到 jquery library
 			$: 'jquery',
 			jQuery: 'jquery'
 		}),
